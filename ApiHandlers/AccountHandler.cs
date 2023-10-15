@@ -11,25 +11,14 @@ namespace IbgeApi.ApiHandlers;
 
 public class AccountHandler
 {
-    public AccountHandler()
-    {
-    }
-
-    public AccountHandler(IUserRepository repository)
-    {
-        _repository = repository;
-    }
-
-    private readonly IUserRepository _repository;
-
-    public async Task<IResult> SignIn(CreateUser model)
+    public static async Task<IResult> SignIn(CreateUser model, IUserRepository repository)
     {
         var user = new UserModel();
         user.Name = new Name(model.Name);
         user.Email = new Email(model.Email);
         user.PasswordHash = new PasswordHash(model.Password);
 
-        await _repository.Create(user);
+        await repository.Create(user);
         return Results.Ok("Created");
     }
 }
