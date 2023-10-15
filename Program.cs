@@ -17,6 +17,6 @@ builder.Services.AddScoped<IUserRepository, UserRepository>();
 var app = builder.Build();
 
 app.MapGet("/", ApiHealthCheckHandler.Get);
-app.MapPost("/account", (HttpContext http, CreateUser user) => new AccountHandler().SignIn(user));
+app.MapPost("/account", AccountHandler.SignIn);
 
 app.Run();
