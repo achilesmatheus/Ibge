@@ -7,6 +7,11 @@ namespace IbgeApi.Repository;
 
 public class UserRepository : IUserRepository
 {
+    public UserRepository(IbgeDbContext context)
+    {
+        _context = context;
+    }
+
     private readonly IbgeDbContext _context;
 
     public async Task<UserModel> GetById(Guid id)
