@@ -7,5 +7,5 @@ public class Email
         EmailAddress = emailAddress;
     }
 
-    public string EmailAddress { get; set; }
+    public string EmailAddress { get; }
 }
