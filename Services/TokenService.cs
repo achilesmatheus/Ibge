@@ -17,7 +17,10 @@ public class TokenService
         var key = Encoding.ASCII.GetBytes(JwtConfiguration.JwtKey);
         var tokenDescriptor = new SecurityTokenDescriptor
         {
-            Subject = new ClaimsIdentity(GetClaims(user)),
+            Subject = new ClaimsIdentity(new Claim[]
+            {
+                new(ClaimTypes.Email, user.Email.EmailAddress)
+            }),
             Expires = DateTime.UtcNow.AddHours(12),
             SigningCredentials = new SigningCredentials(
                 new SymmetricSecurityKey(key),
@@ -28,17 +31,5 @@ public class TokenService
         var token = tokenHandler.CreateToken(tokenDescriptor);
 
         return tokenHandler.WriteToken(token);
-    }
-
-    private IEnumerable<Claim> GetClaims(UserModel user)
-    {
-        var result = new List<Claim>
-        {
-            new(ClaimTypes.Email, user.Email.EmailAddress)
-        };
-        // result.AddRange(
-        //     user.Roles.Select(role => new Claim(ClaimTypes.Role, role.Name))
-        // );
-        return result;
     }
 }
