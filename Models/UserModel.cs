@@ -4,10 +4,6 @@ namespace IbgeApi.Models;
 
 public class UserModel
 {
-    public UserModel()
-    {
-    }
-
     public Guid Id { get; set; }
     public Name Name { get; set; }
     public Email Email { get; set; }

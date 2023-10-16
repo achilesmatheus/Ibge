@@ -1,7 +1,4 @@
-﻿using Microsoft.AspNetCore.Http.HttpResults;
-using Microsoft.AspNetCore.Mvc;
-
-namespace IbgeApi.ApiHandlers;
+﻿namespace IbgeApi.ApiHandlers;
 
 public static class ApiHealthCheckHandler
 {

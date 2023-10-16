@@ -1,9 +1,10 @@
 {
   "version": 2,
-  "dgSpecHash": "AAT0uYk9ytHtHfEl576ZpazXveUUi6k2qVDzW5PMQkgF804LJu3EnZDC4+RTp3A4QYId6ZTfseYVPbDawKHqqw==",
+  "dgSpecHash": "jLsigDaoVuTngx1T3F4wuU3frFhDCMtxKXvvH+H7/d8ip9OT+QRzKpkDl2+HVpfTFrgvEhYllFhJyH0vgB4ocg==",
   "success": true,
   "projectFilePath": "C:\\Users\\achil\\Desktop\\Projects\\Csharp\\Api\\Ibge - Api\\Ibge - Api.csproj",
   "expectedPackageFiles": [
+    "C:\\Users\\achil\\.nuget\\packages\\bcrypt.net-next\\4.0.3\\bcrypt.net-next.4.0.3.nupkg.sha512",
     "C:\\Users\\achil\\.nuget\\packages\\flunt\\2.0.5\\flunt.2.0.5.nupkg.sha512",
     "C:\\Users\\achil\\.nuget\\packages\\humanizer.core\\2.14.1\\humanizer.core.2.14.1.nupkg.sha512",
     "C:\\Users\\achil\\.nuget\\packages\\microsoft.aspnetcore.authentication\\2.2.0\\microsoft.aspnetcore.authentication.2.2.0.nupkg.sha512",

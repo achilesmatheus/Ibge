@@ -1,12 +1,8 @@
 ﻿using IbgeApi.Models;
-using IbgeApi.Repository;
 using IbgeApi.Repository.Interfaces;
 using IbgeApi.Services;
 using IbgeApi.ValueObjects;
 using IbgeApi.ViewModels;
-using Microsoft.AspNetCore.Http.HttpResults;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
 
 namespace IbgeApi.ApiHandlers;
 
@@ -30,10 +26,14 @@ public abstract class AccountHandler
 
             await repository.Create(user);
 
-            var result = new ResultViewModel<string>()
+            var result = new ResultViewModel<object>()
             {
                 Message = "User created successfully",
-                Data = user
+                Data = new
+                {
+                    Name = user.Name.FirstName,
+                    Email = user.Email.EmailAddress
+                }
             };
 
             return Results.Ok(result);
@@ -42,7 +42,7 @@ public abstract class AccountHandler
         {
             var result = new ResultViewModel<string>()
             {
-                Errors = new[] { e.Message }
+                Errors = e.Message
             };
 
             return Results.BadRequest(result);
@@ -57,7 +57,9 @@ public abstract class AccountHandler
         try
         {
             var user = await repository.GetByEmail(model.Email);
-            if (user is null || !BCrypt.Net.BCrypt.Verify(model.Password, user.PasswordHash.Hash))
+            var passwordsAreNotEquals = !BCrypt.Net.BCrypt.Verify(model.Password, user.PasswordHash.Hash);
+
+            if (user is null || passwordsAreNotEquals)
                 throw new Exception("Usuário ou senha incorretos");
 
             var token = tokenService.GenerateToken(user);
@@ -72,11 +74,7 @@ public abstract class AccountHandler
         }
         catch (Exception e)
         {
-            var result = new ResultViewModel<string>()
-            {
-                Errors = new[] { e.Message }
-            };
-
+            var result = new ResultViewModel<string>() { Errors = e.Message };
             return Results.BadRequest(result);
         }
     }
