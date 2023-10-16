@@ -3,6 +3,7 @@ using IbgeApi.Data;
 using IbgeApi.Models;
 using IbgeApi.Repository;
 using IbgeApi.Repository.Interfaces;
+using IbgeApi.Services;
 using IbgeApi.ViewModels;
 using Microsoft.EntityFrameworkCore;
 
@@ -13,10 +14,12 @@ builder.Services.AddDbContext<IbgeDbContext>(options =>
     options.UseSqlite(connectionString));
 
 builder.Services.AddScoped<IUserRepository, UserRepository>();
+builder.Services.AddScoped<TokenService>();
 
 var app = builder.Build();
 
 app.MapGet("/", ApiHealthCheckHandler.Get);
-app.MapPost("/account", AccountHandler.SignIn);
+app.MapPost("/signin", AccountHandler.SignIn);
+app.MapPost("/login", AccountHandler.Login);
 
 app.Run();
