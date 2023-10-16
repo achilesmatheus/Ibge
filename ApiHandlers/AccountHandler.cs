@@ -6,19 +6,78 @@ using IbgeApi.ValueObjects;
 using IbgeApi.ViewModels;
 using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 
 namespace IbgeApi.ApiHandlers;
 
-public class AccountHandler
+public abstract class AccountHandler
 {
-    public static async Task<IResult> SignIn(CreateUser model, IUserRepository repository)
+    public static async Task<IResult> SignIn(CreateUserViewModel model, IUserRepository repository)
     {
-        var user = new UserModel();
-        user.Name = new Name(model.Name);
-        user.Email = new Email(model.Email);
-        user.PasswordHash = new PasswordHash(model.Password);
+        // Fail fast validation
+        model.Validate();
+        if (model.IsValid == false) return Results.BadRequest(model.Notifications);
 
-        await repository.Create(user);
-        return Results.Ok("Created");
+        try
+        {
+            var passwordHash = BCrypt.Net.BCrypt.HashPassword(model.Password);
+            var user = new UserModel
+            {
+                Name = new Name(model.Name),
+                Email = new Email(model.Email),
+                PasswordHash = new PasswordHash(passwordHash)
+            };
+
+            await repository.Create(user);
+
+            var result = new ResultViewModel<string>()
+            {
+                Message = "User created successfully",
+                Data = user
+            };
+
+            return Results.Ok(result);
+        }
+        catch (Exception e)
+        {
+            var result = new ResultViewModel<string>()
+            {
+                Errors = new[] { e.Message }
+            };
+
+            return Results.BadRequest(result);
+        }
+    }
+
+    public static async Task<IResult> Login(LoginViewModel model, IUserRepository repository, TokenService tokenService)
+    {
+        model.Validate();
+        if (model.IsValid == false) return Results.BadRequest(model.Notifications);
+
+        try
+        {
+            var user = await repository.GetByEmail(model.Email);
+            if (user is null || !BCrypt.Net.BCrypt.Verify(model.Password, user.PasswordHash.Hash))
+                throw new Exception("Usuário ou senha incorretos");
+
+            var token = tokenService.GenerateToken(user);
+
+            var result = new ResultViewModel<string>()
+            {
+                Message = $"Token gerado para o usuário: {user.Name.FirstName}",
+                Data = token
+            };
+
+            return Results.Ok(result);
+        }
+        catch (Exception e)
+        {
+            var result = new ResultViewModel<string>()
+            {
+                Errors = new[] { e.Message }
+            };
+
+            return Results.BadRequest(result);
+        }
     }
 }
