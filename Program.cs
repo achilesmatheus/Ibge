@@ -20,7 +20,7 @@ builder.Services.AddScoped<IUserService, UserService>();
 
 var app = builder.Build();
 
-app.MapGet("/", ApiHealthCheckHandler.Get);
+app.MapGet("/", HealthCheckHandler.Get);
 app.MapPost("/signup", AccountHandler.SignUp);
 app.MapPost("/login", AccountHandler.Login);
 
