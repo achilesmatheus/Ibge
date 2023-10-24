@@ -1,5 +1,6 @@
 ﻿using Flunt.Notifications;
 using Flunt.Validations;
+using IbgeApi.ValueObjects;
 
 namespace IbgeApi.ViewModels;
 
@@ -13,7 +14,10 @@ public class CreateUserViewModel : Notifiable<Notification>
     {
         AddNotifications(new Contract<Notification>()
             .Requires()
+            .IsNotNullOrEmpty(Name, "Name", "Informe um nome")
             .IsNotNullOrEmpty(Email, "Email", "Informe o email")
-            .IsEmail(Email, "Email", "Email inválido"));
+            .IsEmail(Email, "Email", "Email inválido")
+            .IsNotNullOrEmpty(Password, "Password", "Informe uma senha")
+            .IsGreaterOrEqualsThan(Password, 4, "Password", "A senha deve conter pelo menos 4 caracteres"));
     }
 }

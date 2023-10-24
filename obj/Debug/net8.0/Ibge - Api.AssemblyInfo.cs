@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("Ibge - Api")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+1646ad2c41d73eb1308562265f78a627b82fa096")]
 [assembly: System.Reflection.AssemblyProductAttribute("Ibge - Api")]
 [assembly: System.Reflection.AssemblyTitleAttribute("Ibge - Api")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

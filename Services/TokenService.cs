@@ -5,11 +5,12 @@ using IbgeApi.Models;
 using Microsoft.IdentityModel.Tokens;
 using IbgeApi.Configurations;
 using IbgeApi.Models;
+using IbgeApi.Services.Interfaces;
 using IbgeApi.ValueObjects;
 
 namespace IbgeApi.Services;
 
-public class TokenService
+public class TokenService : ITokenService
 {
     public string GenerateToken(UserModel user)
     {
