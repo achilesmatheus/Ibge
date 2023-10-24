@@ -131,3 +131,5 @@ C:\Users\achil\Desktop\Projects\Csharp\Api\Ibge - Api\bin\Debug\net8.0\ru\Micros
 C:\Users\achil\Desktop\Projects\Csharp\Api\Ibge - Api\bin\Debug\net8.0\tr\Microsoft.CodeAnalysis.Workspaces.resources.dll
 C:\Users\achil\Desktop\Projects\Csharp\Api\Ibge - Api\bin\Debug\net8.0\zh-Hans\Microsoft.CodeAnalysis.Workspaces.resources.dll
 C:\Users\achil\Desktop\Projects\Csharp\Api\Ibge - Api\bin\Debug\net8.0\zh-Hant\Microsoft.CodeAnalysis.Workspaces.resources.dll
+C:\Users\achil\Desktop\Projects\Csharp\Api\Ibge - Api\obj\Debug\net8.0\Ibge - Api.sourcelink.json
+C:\Users\achil\Desktop\Projects\Csharp\Api\Ibge - Api\bin\Debug\net8.0\BCrypt.Net-Next.dll

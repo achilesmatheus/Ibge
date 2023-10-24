@@ -2,34 +2,47 @@
 using IbgeApi.Repository;
 using IbgeApi.Repository.Interfaces;
 using IbgeApi.Services;
+using IbgeApi.Services.Interfaces;
 using IbgeApi.ValueObjects;
 using IbgeApi.ViewModels;
-using Microsoft.AspNetCore.Http.HttpResults;
-using Microsoft.AspNetCore.Mvc;
 
 namespace IbgeApi.ApiHandlers;
 
 public class AccountHandler
 {
-    public AccountHandler()
+    public static Task<IResult> SignUp(IUserService service, CreateUserViewModel model)
     {
+        return service.Signup(model);
     }
 
-    public AccountHandler(IUserRepository repository)
+    public static async Task<IResult> Login(LoginViewModel model, IUserRepository repository,
+        ITokenService tokenService)
     {
-        _repository = repository;
-    }
+        model.Validate();
+        if (model.IsValid == false) return Results.BadRequest(model.Notifications);
 
-    private readonly IUserRepository _repository;
+        try
+        {
+            var user = await repository.GetByEmail(model.Email);
+            var passwordsAreNotEquals = !BCrypt.Net.BCrypt.Verify(model.Password, user.PasswordHash.Hash);
 
-    public async Task<IResult> SignIn(CreateUser model)
-    {
-        var user = new UserModel();
-        user.Name = new Name(model.Name);
-        user.Email = new Email(model.Email);
-        user.PasswordHash = new PasswordHash(model.Password);
+            if (user is null || passwordsAreNotEquals)
+                throw new Exception("Usuário ou senha incorretos");
 
-        await _repository.Create(user);
-        return Results.Ok("Created");
+            var token = tokenService.GenerateToken(user);
+
+            var result = new ResultViewModel<string>()
+            {
+                Message = $"Token gerado para o usuário: {user.Name.FirstName}",
+                Data = token
+            };
+
+            return Results.Ok(result);
+        }
+        catch (Exception e)
+        {
+            var result = new ResultViewModel<string>() { Errors = e.Message };
+            return Results.BadRequest(result);
+        }
     }
 }

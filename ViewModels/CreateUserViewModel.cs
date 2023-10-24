@@ -3,23 +3,17 @@ using Flunt.Validations;
 
 namespace IbgeApi.ViewModels;
 
-public class CreateUser : Notifiable<Notification>
+public class CreateUserViewModel : Notifiable<Notification>
 {
-    public CreateUser(string name, string email, string password)
-    {
-        Name = name;
-        Email = email;
-        Password = password;
-    }
-
     public string Name { get; set; }
     public string Email { get; set; }
     public string Password { get; set; }
 
-    private void Validate()
+    public void Validate()
     {
         AddNotifications(new Contract<Notification>()
             .Requires()
+            .IsNotNullOrEmpty(Email, "Email", "Informe o email")
             .IsEmail(Email, "Email", "Email inválido"));
     }
 }
