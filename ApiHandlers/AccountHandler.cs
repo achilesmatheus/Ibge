@@ -1,55 +1,22 @@
 ﻿using IbgeApi.Models;
+using IbgeApi.Repository;
 using IbgeApi.Repository.Interfaces;
 using IbgeApi.Services;
+using IbgeApi.Services.Interfaces;
 using IbgeApi.ValueObjects;
 using IbgeApi.ViewModels;
 
 namespace IbgeApi.ApiHandlers;
 
-public abstract class AccountHandler
+public class AccountHandler
 {
-    public static async Task<IResult> SignIn(CreateUserViewModel model, IUserRepository repository)
+    public static Task<IResult> SignUp(IUserService service, CreateUserViewModel model)
     {
-        // Fail fast validation
-        model.Validate();
-        if (model.IsValid == false) return Results.BadRequest(model.Notifications);
-
-        try
-        {
-            var passwordHash = BCrypt.Net.BCrypt.HashPassword(model.Password);
-            var user = new UserModel
-            {
-                Name = new Name(model.Name),
-                Email = new Email(model.Email),
-                PasswordHash = new PasswordHash(passwordHash)
-            };
-
-            await repository.Create(user);
-
-            var result = new ResultViewModel<object>()
-            {
-                Message = "User created successfully",
-                Data = new
-                {
-                    Name = user.Name.FirstName,
-                    Email = user.Email.EmailAddress
-                }
-            };
-
-            return Results.Ok(result);
-        }
-        catch (Exception e)
-        {
-            var result = new ResultViewModel<string>()
-            {
-                Errors = e.Message
-            };
-
-            return Results.BadRequest(result);
-        }
+        return service.Signup(model);
     }
 
-    public static async Task<IResult> Login(LoginViewModel model, IUserRepository repository, TokenService tokenService)
+    public static async Task<IResult> Login(LoginViewModel model, IUserRepository repository,
+        ITokenService tokenService)
     {
         model.Validate();
         if (model.IsValid == false) return Results.BadRequest(model.Notifications);
