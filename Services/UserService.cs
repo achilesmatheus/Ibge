@@ -26,7 +26,7 @@ public class UserService(IUserRepository repository, ITokenService tokenService)
 
             await repository.Create(user);
 
-            var result = new ResultViewModel<object>()
+            var result = new ResultViewModel()
             {
                 Message = "User created successfully",
                 Data = new
@@ -40,7 +40,7 @@ public class UserService(IUserRepository repository, ITokenService tokenService)
         }
         catch (Exception e)
         {
-            var result = new ResultViewModel<string>()
+            var result = new ResultViewModel()
             {
                 Errors = e.Message
             };
@@ -52,7 +52,8 @@ public class UserService(IUserRepository repository, ITokenService tokenService)
     public async Task<IResult> Login(LoginViewModel loginViewModel)
     {
         loginViewModel.Validate();
-        if (loginViewModel.IsValid == false) return Results.BadRequest(loginViewModel.Notifications);
+        if (loginViewModel.IsValid == false)
+            return Results.BadRequest(loginViewModel.Notifications);
 
         try
         {
@@ -64,7 +65,7 @@ public class UserService(IUserRepository repository, ITokenService tokenService)
 
             var token = tokenService.GenerateToken(user);
 
-            var result = new ResultViewModel<string>()
+            var result = new ResultViewModel()
             {
                 Message = $"Token gerado para o usuário: {user.Name.FirstName}",
                 Data = token
@@ -74,7 +75,7 @@ public class UserService(IUserRepository repository, ITokenService tokenService)
         }
         catch (Exception e)
         {
-            var result = new ResultViewModel<string>() { Errors = e.Message };
+            var result = new ResultViewModel() { Errors = e.Message };
             return Results.BadRequest(result);
         }
     }
