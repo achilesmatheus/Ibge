@@ -2,6 +2,7 @@
 using IbgeApi.Models;
 
 namespace IbgeApi.Data;
+
 using Microsoft.EntityFrameworkCore;
 
 public class IbgeDbContext : DbContext
@@ -11,9 +12,11 @@ public class IbgeDbContext : DbContext
     }
 
     public DbSet<UserModel> Users { get; set; }
+    public DbSet<LocationModel> Locations { get; set; }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         modelBuilder.ApplyConfiguration(new UserMap());
+        modelBuilder.ApplyConfiguration(new LocationMap());
     }
 }
