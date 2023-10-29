@@ -1,6 +1,5 @@
 ﻿using Flunt.Notifications;
 using Flunt.Validations;
-using IbgeApi.ValueObjects;
 
 namespace IbgeApi.ViewModels;
 

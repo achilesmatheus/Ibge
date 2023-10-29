@@ -18,11 +18,11 @@ namespace IbgeApi.Migrations
 #pragma warning disable 612, 618
             modelBuilder.HasAnnotation("ProductVersion", "8.0.0-rc.2.23480.1");
 
-            modelBuilder.Entity("IbgeApi.Models.UserModel", b =>
+            modelBuilder.Entity("IbgeApi.Models.LocationModel", b =>
                 {
-                    b.Property<Guid>("Id")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("TEXT");
+                        .HasColumnType("INTEGER");
 
                     b.Property<DateTime>("CreatedAt")
                         .ValueGeneratedOnAdd()
@@ -33,6 +33,43 @@ namespace IbgeApi.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("datetime2")
                         .HasDefaultValueSql("CURRENT_TIMESTAMP");
+
+                    b.ComplexProperty<Dictionary<string, object>>("City", "IbgeApi.Models.LocationModel.City#City", b1 =>
+                        {
+                            b1.IsRequired();
+
+                            b1.Property<string>("CityName")
+                                .IsRequired()
+                                .HasColumnType("nvarchar")
+                                .HasColumnName("city");
+                        });
+
+                    b.ComplexProperty<Dictionary<string, object>>("State", "IbgeApi.Models.LocationModel.State#State", b1 =>
+                        {
+                            b1.IsRequired();
+
+                            b1.Property<string>("StateName")
+                                .IsRequired()
+                                .HasColumnType("nvarchar")
+                                .HasColumnName("state");
+                        });
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Locations");
+                });
+
+            modelBuilder.Entity("IbgeApi.Models.UserModel", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("TEXT");
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("TEXT");
+
+                    b.Property<DateTime>("UpdatedAt")
+                        .HasColumnType("TEXT");
 
                     b.ComplexProperty<Dictionary<string, object>>("Email", "IbgeApi.Models.UserModel.Email#Email", b1 =>
                         {

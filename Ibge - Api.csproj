@@ -6,6 +6,9 @@
         <ImplicitUsings>enable</ImplicitUsings>
         <RootNamespace>IbgeApi</RootNamespace>
     </PropertyGroup>
+    <PropertyGroup>
+        <GenerateDocumentationFile>true</GenerateDocumentationFile>
+    </PropertyGroup>
 
     <ItemGroup>
         <PackageReference Include="BCrypt.Net-Next" Version="4.0.3"/>
@@ -21,6 +24,48 @@
         <PackageReference Include="Swashbuckle.AspNetCore" Version="6.5.0" />
 
 
+    </ItemGroup>
+
+    <ItemGroup>
+      <Compile Remove="wwwroot\**" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <EmbeddedResource Remove="wwwroot\**" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <Content Remove="wwwroot\**" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <None Remove="wwwroot\**" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <_ContentIncludedByDefault Remove="wwwroot\swagger-ui\app\.eslintrc.cjs" />
+      <_ContentIncludedByDefault Remove="wwwroot\swagger-ui\app\.gitignore" />
+      <_ContentIncludedByDefault Remove="wwwroot\swagger-ui\app\.pnp.cjs" />
+      <_ContentIncludedByDefault Remove="wwwroot\swagger-ui\app\.pnp.loader.mjs" />
+      <_ContentIncludedByDefault Remove="wwwroot\swagger-ui\app\dist\assets\index-c7e05d32.js" />
+      <_ContentIncludedByDefault Remove="wwwroot\swagger-ui\app\dist\assets\index-d526a0c5.css" />
+      <_ContentIncludedByDefault Remove="wwwroot\swagger-ui\app\dist\assets\react-35ef61ed.svg" />
+      <_ContentIncludedByDefault Remove="wwwroot\swagger-ui\app\dist\index.html" />
+      <_ContentIncludedByDefault Remove="wwwroot\swagger-ui\app\dist\vite.svg" />
+      <_ContentIncludedByDefault Remove="wwwroot\swagger-ui\app\index.html" />
+      <_ContentIncludedByDefault Remove="wwwroot\swagger-ui\app\package.json" />
+      <_ContentIncludedByDefault Remove="wwwroot\swagger-ui\app\public\vite.svg" />
+      <_ContentIncludedByDefault Remove="wwwroot\swagger-ui\app\README.md" />
+      <_ContentIncludedByDefault Remove="wwwroot\swagger-ui\app\src\App.css" />
+      <_ContentIncludedByDefault Remove="wwwroot\swagger-ui\app\src\App.tsx" />
+      <_ContentIncludedByDefault Remove="wwwroot\swagger-ui\app\src\assets\react.svg" />
+      <_ContentIncludedByDefault Remove="wwwroot\swagger-ui\app\src\index.css" />
+      <_ContentIncludedByDefault Remove="wwwroot\swagger-ui\app\src\main.tsx" />
+      <_ContentIncludedByDefault Remove="wwwroot\swagger-ui\app\src\vite-env.d.ts" />
+      <_ContentIncludedByDefault Remove="wwwroot\swagger-ui\app\tsconfig.json" />
+      <_ContentIncludedByDefault Remove="wwwroot\swagger-ui\app\tsconfig.node.json" />
+      <_ContentIncludedByDefault Remove="wwwroot\swagger-ui\app\vite.config.ts" />
+      <_ContentIncludedByDefault Remove="wwwroot\swagger-ui\app\yarn.lock" />
     </ItemGroup>
 
 

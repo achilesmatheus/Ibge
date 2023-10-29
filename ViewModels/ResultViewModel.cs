@@ -1,8 +1,8 @@
 ﻿namespace IbgeApi.ViewModels;
 
-public class ResultViewModel<T>
+public class ResultViewModel
 {
     public string? Message { get; set; }
-    public T Data { get; set; }
-    public string Errors { get; set; }
+    public object? Data { get; set; }
+    public object? Errors { get; set; }
 }

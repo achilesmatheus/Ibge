@@ -1,11 +1,19 @@
 {
   "Version": 1,
-  "Hash": "Q/BX4/tuYuoyD09dOZGxCBa0E8yekJoAJyrHaAlZpzQ=",
+  "Hash": "ODr7HQE6swyUR00dN4Qg7hVlAVXkLr9TNdJhHTuQI/8=",
   "Source": "Ibge - Api",
   "BasePath": "_content/Ibge - Api",
   "Mode": "Default",
   "ManifestType": "Build",
   "ReferencedProjectsConfiguration": [],
-  "DiscoveryPatterns": [],
+  "DiscoveryPatterns": [
+    {
+      "Name": "Ibge - Api\\wwwroot",
+      "Source": "Ibge - Api",
+      "ContentRoot": "C:\\Users\\achil\\Desktop\\Projects\\Csharp\\Api\\Ibge - Api\\wwwroot\\",
+      "BasePath": "_content/Ibge - Api",
+      "Pattern": "**"
+    }
+  ],
   "Assets": []
 }
