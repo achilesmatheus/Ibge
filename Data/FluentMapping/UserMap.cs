@@ -28,12 +28,12 @@ public class UserMap : IEntityTypeConfiguration<UserModel>
         builder.Property(t => t.Id)
             .ValueGeneratedOnAdd();
 
-        builder.Property(t => t.CreatedAt)
-            .HasColumnType(SqlDataTypes.Datetime2)
-            .HasDefaultValueSql("CURRENT_TIMESTAMP");
-
-        builder.Property(t => t.UpdatedAt)
-            .HasColumnType(SqlDataTypes.Datetime2)
-            .HasDefaultValueSql("CURRENT_TIMESTAMP");
+        // builder.Property(t => t.CreatedAt)
+        //     .HasColumnType(SqlDataTypes.Datetime2)
+        //     .HasDefaultValueSql("CURRENT_TIMESTAMP");
+        //
+        // builder.Property(t => t.UpdatedAt)
+        //     .HasColumnType(SqlDataTypes.Datetime2)
+        //     .HasDefaultValueSql("CURRENT_TIMESTAMP");
     }
 }
