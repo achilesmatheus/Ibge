@@ -9,7 +9,7 @@ namespace IbgeApi.Services;
 
 public class UserService(IUserRepository repository, ITokenService tokenService) : IUserService
 {
-    public async Task<IResult> Signup(CreateUserViewModel model)
+    public async Task<IResult> Signup(UserViewModel model)
     {
         model.Validate();
         if (model.IsValid == false) return Results.BadRequest(model.Notifications);
@@ -36,7 +36,7 @@ public class UserService(IUserRepository repository, ITokenService tokenService)
                 }
             };
 
-            return Results.Ok(result);
+            return Results.Created("/signup", result);
         }
         catch (Exception e)
         {
