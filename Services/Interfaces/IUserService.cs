@@ -5,6 +5,6 @@ namespace IbgeApi.Services.Interfaces;
 
 public interface IUserService
 {
-    Task<IResult> Signup(CreateUserViewModel model);
+    Task<IResult> Signup(UserViewModel model);
     Task<IResult> Login(LoginViewModel model);
 }
